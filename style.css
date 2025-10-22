@@ -1,0 +1,202 @@
+/* -------------------------
+   Base design tokens (inspired by your Tailwind variables)
+   ------------------------- */
+:root{
+  --background: hsl(240 20% 98%);
+  --foreground: hsl(240 100% 10%);
+  --card: hsl(240 30% 8%);
+  --primary: 193 78% 45%;
+  --secondary: 183 80% 55%;
+  --muted: hsl(240 5% 96%);
+  --radius: 18px;
+  --glass-bg: rgba(255,255,255,0.08);
+  --glass-border: rgba(255,255,255,0.12);
+  --neon-blue: hsl(193 78% 45%);
+  --neon-purple: hsl(283 80% 55%); /* slight adjustment */
+  --neon-pink: hsl(333 70% 70%);
+}
+
+/* Dark theme */
+.dark {
+  --background: hsl(240 10% 8%);
+  --foreground: hsl(240 10% 98%);
+  --card: hsl(240 10% 12%);
+  --glass-bg: rgba(0,0,0,0.26);
+  --glass-border: rgba(255,255,255,0.06);
+}
+
+/* Fonts & reset */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--foreground);
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+  background-size:200% 200%;
+  animation: gradientShift 8s ease infinite;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* animation */
+@keyframes gradientShift {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* floating shapes */
+.floating-shapes{position:fixed;inset:0;pointer-events:none;z-index:0}
+.shape{position:absolute;border-radius:999px;filter:blur(40px);opacity:0.12;transform:translateZ(0)}
+.shape.s1{width:300px;height:300px;left:5%;top:8%;background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))}
+.shape.s2{width:420px;height:420px;right:2%;top:55%;background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))}
+.shape.s3{width:360px;height:360px;left:18%;top:40%;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02))}
+
+/* container */
+.app-root{
+  position:relative;
+  z-index:10;
+  max-width:1100px;
+  margin:0 auto;
+  padding:36px 20px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+}
+
+/* theme toggle */
+.theme-toggle{
+  position:fixed;
+  right:20px;
+  top:20px;
+  z-index:50;
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  padding:8px 10px;
+  border-radius:12px;
+  backdrop-filter: blur(6px);
+  cursor:pointer;
+  box-shadow:0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* hero */
+.hero{text-align:center;margin-top:6vh}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 14px;
+  border-radius:999px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.06);
+  font-weight:600; font-size:14px;
+}
+.badge.small{padding:6px 10px}
+.spark{margin-right:6px}
+.title{font-family:"Orbitron", monospace;font-weight:900;margin:14px 0;font-size:48px;line-height:1;color:var(--foreground);text-shadow:0 6px 40px rgba(0,0,0,0.35)}
+.subtitle{color:rgba(0,0,0,0.55);opacity:0.95}
+
+/* tabs */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0;z-index:20}
+.tab{
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  padding:10px 16px;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:600;
+  backdrop-filter:blur(6px);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.tab:hover{transform:translateY(-3px)}
+.tab.active{box-shadow:0 10px 30px rgba(0,0,0,0.2);transform:scale(1.03)}
+
+/* panels */
+.main{width:100%;display:flex;justify-content:center;padding:10px 6px}
+.panel{width:100%;max-width:820px}
+.hidden{display:none}
+
+/* glass card */
+.glass-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border-radius:var(--radius);
+  padding:22px;
+  border:1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+
+/* clock card layout */
+.clock-card{display:flex;flex-direction:column;align-items:center;gap:12px}
+.clock-top{display:flex;flex-direction:column;align-items:center;gap:10px}
+canvas{display:block;background:transparent;border-radius:999px}
+.digital{font-family:"Orbitron", monospace;font-size:28px;background:transparent;padding:8px 14px;border-radius:12px;letter-spacing:1px}
+.digital-display{font-size:36px}
+.muted{color:rgba(0,0,0,0.45);font-size:14px}
+
+/* stopwatch / timer layout */
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btn{padding:10px 12px;border-radius:10px;border:none;background:rgba(255,255,255,0.04);cursor:pointer;font-weight:600}
+.btn:disabled{opacity:.45;cursor:default}
+.btn-glow{box-shadow:0 10px 30px rgba(0,0,0,0.18);transform:translateZ(0);transition:transform .18s}
+.btn-glow:hover{transform:translateY(-3px)}
+
+/* stopwatch display */
+.stopwatch-display{font-size:36px;}
+
+/* laps */
+.laps{margin:12px 0 0 0;padding-left:18px;color:rgba(0,0,0,0.6);max-height:160px;overflow:auto}
+
+/* timer inputs */
+.timer-inputs{display:flex;gap:12px;align-items:center;justify-content:center;margin-bottom:12px}
+.timer-inputs label{display:flex;flex-direction:column;font-weight:600;font-size:13px}
+.timer-inputs input{width:90px;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);text-align:center}
+
+/* sand timer */
+.sand-card{display:flex;flex-direction:column;align-items:center;gap:14px}
+.hourglass{width:140px;height:220px;position:relative;display:flex;align-items:center;justify-content:center;perspective:1000px}
+.glass-top,.glass-bottom{width:70%;height:40%;border-radius:50%;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));border:1px solid var(--glass-border)}
+.glass-neck{position:absolute;width:30px;height:12px;background:transparent;border-left:1px solid rgba(0,0,0,0.08);border-right:1px solid rgba(0,0,0,0.08);top:calc(50% - 6px);border-radius:4px}
+.sand-top{position:relative;overflow:hidden}
+.sand-bottom{position:relative;overflow:hidden}
+.sand-top::after, .sand-bottom::after {
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:70%;
+  background:linear-gradient(180deg, rgba(255,210,120,0.95), rgba(255,190,70,0.9));
+}
+/* top sand starts full, shrinks down */
+.sand-top.running::after{animation:topSand 30s linear forwards}
+/* bottom sand grows */
+.sand-bottom.running::after{height:0%;animation:bottomSand 30s linear forwards}
+@keyframes topSand{
+  0%{height:70%}
+  100%{height:2%}
+}
+@keyframes bottomSand{
+  0%{height:2%}
+  100%{height:68%}
+}
+
+/* sand falling stream */
+.sand-neck-stream{position:absolute;width:6px;height:40px;background:linear-gradient(180deg, rgba(255,210,120,0.95), rgba(255,190,70,0.9));top:calc(50% - 20px);border-radius:4px;opacity:0}
+/* make stream visible only when running */
+.hourglass.running .sand-neck-stream{opacity:1;animation:streamPulse .6s linear infinite}
+@keyframes streamPulse{0%{transform:scaleY(1)}50%{transform:scaleY(.6)}100%{transform:scaleY(1)}}
+
+/* small helpers */
+.footer{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:22px;color:rgba(0,0,0,0.55)}
+.attribution{font-size:13px;color:rgba(0,0,0,0.5)}
+
+/* responsive */
+@media (max-width:680px){
+  .title{font-size:34px}
+  canvas{width:220px;height:220px}
+  .digital{font-size:22px}
+}

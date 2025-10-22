@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Time Master — Clock, Stopwatch & Timer</title>
+    <meta name="description" content="Digital and analog clock with stopwatch, timer and animated sand timer." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="floating-shapes" aria-hidden="true">
+      <div class="shape s1"></div>
+      <div class="shape s2"></div>
+      <div class="shape s3"></div>
+    </div>
+
+    <div class="app-root">
+      <button id="theme-toggle" class="theme-toggle" title="Toggle theme">🌗</button>
+
+      <header class="hero">
+        <div class="badge"><span class="spark">✨</span> Professional Time Management</div>
+        <h1 class="title digital-display">Time Master</h1>
+        <p class="subtitle">Track time with precision, style, and elegance</p>
+      </header>
+
+      <nav class="tabs" role="tablist" aria-label="Main tabs">
+        <button class="tab active" data-tab="clock" role="tab" aria-selected="true">Clock</button>
+        <button class="tab" data-tab="stopwatch" role="tab" aria-selected="false">Stopwatch</button>
+        <button class="tab" data-tab="timer" role="tab" aria-selected="false">Timer</button>
+        <button class="tab" data-tab="sandtimer" role="tab" aria-selected="false">Sand Timer</button>
+      </nav>
+
+      <main class="main">
+        <!-- CLOCK -->
+        <section id="tab-clock" class="panel">
+          <div class="glass-card clock-card">
+            <div class="clock-top">
+              <canvas id="analog-canvas" width="280" height="280" aria-label="Analog clock"></canvas>
+              <div class="digital" id="digital-clock" aria-live="polite">00:00:00</div>
+            </div>
+            <p class="muted">Local time</p>
+          </div>
+        </section>
+
+        <!-- STOPWATCH -->
+        <section id="tab-stopwatch" class="panel hidden">
+          <div class="glass-card">
+            <div class="digital stopwatch-display" id="stopwatch-display">00:00.000</div>
+            <div class="controls">
+              <button class="btn btn-glow" id="sw-start">Start</button>
+              <button class="btn" id="sw-stop" disabled>Stop</button>
+              <button class="btn" id="sw-reset" disabled>Reset</button>
+              <button class="btn" id="sw-lap" disabled>Lap</button>
+            </div>
+            <ol id="sw-laps" class="laps"></ol>
+          </div>
+        </section>
+
+        <!-- TIMER -->
+        <section id="tab-timer" class="panel hidden">
+          <div class="glass-card">
+            <div class="timer-inputs">
+              <label>
+                Minutes
+                <input type="number" id="timer-min" min="0" value="1" />
+              </label>
+              <label>
+                Seconds
+                <input type="number" id="timer-sec" min="0" max="59" value="0" />
+              </label>
+            </div>
+            <div class="digital timer-display" id="timer-display">00:00</div>
+            <div class="controls">
+              <button class="btn btn-glow" id="timer-start">Start</button>
+              <button class="btn" id="timer-pause" disabled>Pause</button>
+              <button class="btn" id="timer-reset" disabled>Reset</button>
+            </div>
+            <p class="muted">When timer completes, you'll see a visual notification.</p>
+          </div>
+        </section>
+
+        <!-- SAND TIMER -->
+        <section id="tab-sandtimer" class="panel hidden">
+          <div class="glass-card sand-card">
+            <div class="hourglass" id="hourglass" aria-hidden="true">
+              <div class="glass-top sand-top"></div>
+              <div class="glass-neck"></div>
+              <div class="glass-bottom sand-bottom"></div>
+            </div>
+
+            <div class="digital sand-status" id="sand-status">Ready</div>
+
+            <div class="controls">
+              <button class="btn btn-glow" id="sand-start">Start</button>
+              <button class="btn" id="sand-reset">Reset</button>
+            </div>
+
+            <p class="muted">Animated hourglass (approx 30s run). Click start to flip and run.</p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="badge small">
+          <span class="dot"></span>
+          Built with precision and passion
+        </div>
+        <div class="attribution">Converted to static site — ready for GitHub Pages</div>
+      </footer>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
